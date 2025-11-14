@@ -7,21 +7,33 @@ vim.o.cursorline = true
 vim.opt.clipboard = 'unnamedplus'
 
 vim.g.clipboard = {
-  name = "OSC52",
+  name = "xclip",
   copy = {
     ["+"] = function(lines, _)
-      require("vim.ui.clipboard.osc52").copy("+")(lines)
+      local text = table.concat(lines, "\n")
+      local handle = io.popen("xclip -selection clipboard -in", "w")
+      handle:write(text)
+      handle:close()
     end,
     ["*"] = function(lines, _)
-      require("vim.ui.clipboard.osc52").copy("*")(lines)
+      local text = table.concat(lines, "\n")
+      local handle = io.popen("xclip -selection primary -in", "w")
+      handle:write(text)
+      handle:close()
     end,
   },
   paste = {
     ["+"] = function()
-      return require("vim.ui.clipboard.osc52").paste("+")()
+      local handle = io.popen("xclip -selection clipboard -out", "r")
+      local result = handle:read("*a")
+      handle:close()
+      return vim.split(result, "\n")
     end,
     ["*"] = function()
-      return require("vim.ui.clipboard.osc52").paste("*")()
+      local handle = io.popen("xclip -selection primary -out", "r")
+      local result = handle:read("*a")
+      handle:close()
+      return vim.split(result, "\n")
     end,
   },
 }
