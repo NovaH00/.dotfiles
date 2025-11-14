@@ -6,13 +6,22 @@ vim.opt.number = true
 vim.opt.clipboard = 'unnamedplus'
 
 vim.g.clipboard = {
-  name = "xclip",
+  name = "OSC52",
   copy = {
-    ["+"] = { "xclip", "-selection", "clipboard" },
-    ["*"] = { "xclip", "-selection", "clipboard" },
+    ["+"] = function(lines, _)
+      require("vim.ui.clipboard.osc52").copy("+")(lines)
+    end,
+    ["*"] = function(lines, _)
+      require("vim.ui.clipboard.osc52").copy("*")(lines)
+    end,
   },
   paste = {
-    ["+"] = { "xclip", "-selection", "clipboard", "-o" },
-    ["*"] = { "xclip", "-selection", "clipboard", "-o" },
+    ["+"] = function()
+      return require("vim.ui.clipboard.osc52").paste("+")()
+    end,
+    ["*"] = function()
+      return require("vim.ui.clipboard.osc52").paste("*")()
+    end,
   },
 }
+
