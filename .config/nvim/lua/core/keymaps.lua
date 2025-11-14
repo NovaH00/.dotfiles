@@ -41,3 +41,10 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true })
 -- In normal mode, 9 to go to start line, 0 to go to end line
 vim.keymap.set({'n', 'v'}, '9', '^', { noremap = true, silent = true })
 vim.keymap.set({'n', 'v'}, '0', '$', { noremap = true, silent = true })
+
+-- Remove nvim builtin keymap for <Tab> and <S-Tab> so it
+-- doesn't interfere with nvim cmp
+vim.keymap.del("i", "<Tab>")
+vim.keymap.del("s", "<Tab>")
+vim.keymap.del("i", "<S-Tab>")
+vim.keymap.del("s", "<S-Tab>")
