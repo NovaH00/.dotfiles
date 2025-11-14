@@ -40,3 +40,7 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = tru
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { noremap = true, silent = true })
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { noremap = true, silent = true })
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true })
+
+-- In normal mode, 9 to go to start line, 0 to go to end line
+vim.keymap.set('n', '9', '^', { noremap = true, silent = true })
+vim.keymap.set('n', '0', '$', { noremap = true, silent = true })
