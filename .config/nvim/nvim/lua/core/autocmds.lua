@@ -1,0 +1,10 @@
+-- Open neo-tree when opening a directory, in the same way as Ctrl+P toggle
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--     callback = function()
+--         local stats = vim.loop.fs_stat(vim.fn.argv(0))
+--         if stats and stats.type == "directory" then
+--             -- Mimic Ctrl+P toggle behavior
+--             require("neo-tree.command").execute({ toggle = true, reveal = true, position = "current" })
+--         end
+--     end,
+-- })
