@@ -9,4 +9,5 @@ return {
     { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
     { "nvim-neo-tree/neo-tree.nvim" },
     { "numToStr/Comment.nvim" },
+    { "chikko80/error-lens.nvim" },
 }
