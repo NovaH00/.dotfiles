@@ -48,8 +48,9 @@ vim.keymap.del("i", "<Tab>")
 vim.keymap.del("s", "<Tab>")
 vim.keymap.del("i", "<S-Tab>")
 vim.keymap.del("s", "<S-Tab>")
+-- Overwrite C-f (page up) and C-b (page down) since we using tmux and neotree has f for search
+vim.keymap.set("n", "<C-f>", "<Nop>")
+vim.keymap.set("n", "<C-b>", "<Nop>")
 
 -- ESC exit the search 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
-
