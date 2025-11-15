@@ -48,3 +48,8 @@ vim.keymap.del("i", "<Tab>")
 vim.keymap.del("s", "<Tab>")
 vim.keymap.del("i", "<S-Tab>")
 vim.keymap.del("s", "<S-Tab>")
+
+-- ESC exit the search 
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+
