@@ -54,3 +54,11 @@ vim.keymap.set("n", "<C-b>", "<Nop>")
 
 -- ESC exit the search 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+
+-- Make <A-j/k/i/l> act like h/j/k/l *after* pressing <C-w>
+vim.keymap.set('n', '<C-w><A-j>', '<C-w>h', { noremap = true, silent = true })  -- left
+vim.keymap.set('n', '<C-w><A-k>', '<C-w>j', { noremap = true, silent = true })  -- down
+vim.keymap.set('n', '<C-w><A-i>', '<C-w>k', { noremap = true, silent = true })  -- up
+vim.keymap.set('n', '<C-w><A-l>', '<C-w>l', { noremap = true, silent = true })  -- right
+
