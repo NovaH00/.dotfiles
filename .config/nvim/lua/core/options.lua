@@ -3,8 +3,8 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.number = true
-vim.o.cursorline = true
-
+vim.opt.cursorline = true
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:block,r-cr:block,o:block"
 vim.opt.clipboard = 'unnamedplus'
 
 vim.g.clipboard = {
