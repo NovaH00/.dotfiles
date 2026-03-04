@@ -2,7 +2,6 @@ return {
   "stevearc/oil.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    "nvim-telescope/telescope.nvim",
   },
 
   config = function()
@@ -86,17 +85,6 @@ return {
         ["`"] = "actions.cd",
         ["~"] = "actions.tcd",
         ["g?"] = "actions.show_help",
-        
-        ["/"] = {
-          callback = function()
-            local dir = require("oil").get_current_dir()
-            require("telescope.builtin").find_files({ 
-              cwd = dir,
-              hidden = true 
-            })
-          end,
-          desc = "Fuzzy search files in current directory",
-        },
       },
     })
   end,
