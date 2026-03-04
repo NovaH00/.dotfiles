@@ -1,20 +1,13 @@
-stty -icanon -echo # Disable terminal buffering (prevent typing)
+export PATH="$HOME/.local/bin:$PATH"
+
 calen view 124000095
-stty sane # Enable terminal buffering
+
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+ssh-add -l &>/dev/null || ssh-add ~/.ssh/github_keys/github </dev/null
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-# Ensure ssh-agent keys are loaded
-if ssh-add -l &>/dev/null; then
-    : # already loaded
-else
-  ssh-add ~/.ssh/github_keys/github </dev/null
-fi
-
-
-
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -138,12 +131,10 @@ SAVEHIST=1000
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export PATH=$PATH:/usr/local/go/bin
+# Local binaries
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:/usr/local/go/bin"
 export PATH="$HOME/go/bin:$PATH"
-
-
-# user's aliases
-alias ls='eza -rlgh -s modified --smart-group --group-directories-first --total-size --time-style="+%d/%m/%y %H:%M:%S"'
 
 # NPM system path
 export PATH="$HOME/.npm-global/bin:$PATH"
@@ -153,15 +144,23 @@ export GTK_IM_MODULE=ibus
 export QT_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 
+# Cuda toolkit
+export PATH="/usr/local/cuda/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
 
+# Neovim
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export EDITOR="/opt/nvim-linux-x86_64/bin/nvim"
+
+# llama.cpp
+export PATH="$PATH:/opt/llama.cpp/build/bin"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH="$PATH:/opt/lhu-calen"
-
-
+# User's aliases
+alias ls='eza -rlgh -s modified --smart-group --group-directories-first --time-style="+%d/%m/%y %H:%M:%S"'
+alias lss='eza -rlgh -s modified --smart-group --group-directories-first --total-size --time-style="+%d/%m/%y %H:%M:%S"'
 alias rm='print -rP "%F{red}rm is disabled.%f Use %F{green}trash-put%f instead. Bypass using %F{yellow}\\rm%f" >&2; false'
+
