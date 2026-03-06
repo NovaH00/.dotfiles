@@ -15,8 +15,8 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = tru
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { noremap = true, silent = true })
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { noremap = true, silent = true })
 
-vim.keymap.set({ "n", "v" }, "0", "g_", { noremap = true, silent = true })
-vim.keymap.set({ "n", "v" }, "9", "0",  { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "gl", "g_", { noremap = true, silent = true })
+vim.keymap.set({ "n", "v" }, "gh", "0",  { noremap = true, silent = true })
 
 -- ESC exit the search
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")

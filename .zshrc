@@ -1,3 +1,5 @@
+setopt LOCAL_OPTIONS
+
 export PATH="$HOME/.local/bin:$PATH"
 
 calen view 124000095
@@ -164,3 +166,76 @@ alias ls='eza -rlgh -s modified --smart-group --group-directories-first --time-s
 alias lss='eza -rlgh -s modified --smart-group --group-directories-first --total-size --time-style="+%d/%m/%y %H:%M:%S"'
 alias rm='print -rP "%F{red}rm is disabled.%f Use %F{green}trash-put%f instead. Bypass using %F{yellow}\\rm%f" >&2; false'
 
+# User's commands
+function cpo {
+    # Command to copy the piped data to the clipboard
+    
+    # Check if stdin is a terminal (no pipe provided)
+    if [[ -t 0 ]]; then
+        echo "Error: 'cpo' expects input from a pipe. Usage: command | cpo" >&2
+        return 1
+    fi
+
+    # Read stdin into a variable
+    local content
+    content=$(cat)
+    
+    # Copy to clipboard
+    echo -n "$content" | xclip -selection clipboard
+    
+    # Calculate count
+    local count=$(echo -n "$content" | wc -m | tr -d '[:space:]')
+
+    echo "Copied $count characters to clipboard." >&2
+}
+
+function cpi {
+    # 1. Detect tool and store ONLY the base command
+    local paste_cmd
+    local paste_args=()
+
+    if command -v wl-paste >/dev/null 2>&1; then
+        paste_cmd="wl-paste"
+    elif command -v xclip >/dev/null 2>&1; then
+        paste_cmd="xclip"
+        paste_args=("-selection" "clipboard" "-o")
+    else
+        echo "Error: No clipboard utility found (need wl-clipboard or xclip)." >&2
+        return 1
+    fi
+
+    # 2. Run the command with its arguments
+    "$paste_cmd" "${paste_args[@]}"
+    echo "\n"
+} 
+
+function cpx {
+    # 1. Get the command from the clipboard
+    local cmd_to_run
+    cmd_to_run=$(cpi)
+
+    # 2. Safety check
+    if [[ -z "$cmd_to_run" ]]; then
+        echo "Error: Clipboard is empty." >&2
+        return 1
+    fi
+
+    # 3. Print the warning in bold red
+    echo -e "\e[1;31mWARNING: About to execute:\e[0m" >&2
+    echo "  $cmd_to_run" >&2
+    
+    # 4. Prompt and wait for the user to type 'y' or 'n' AND press Enter
+    echo -n "Execute this command? [y/N]: " >&2
+    local confirm
+    read confirm
+    
+    # 5. Check the result
+    # We use [[ "$confirm" =~ ^[yY]$ ]] to match only 'y' or 'Y'
+    if [[ "$confirm" =~ ^[yY]$ ]]; then
+        echo "Executing..." >&2
+        eval "$cmd_to_run"
+    else
+        echo "Aborted." >&2
+        return 1
+    fi
+}
