@@ -11,3 +11,11 @@ cd .dotfiles
 stow .
 ```
 
+# Applications needed
+- neovim
+- kitty
+- npm (if working with JS, TS. If not then remove it in the nvim's Lazy menu) 
+- python3-venv
+- GNU build toolchain (i.e. build-essential). On Ubuntu, just run `sudo apt install build-essential`
+- zsh
+
