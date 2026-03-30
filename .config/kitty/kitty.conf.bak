@@ -2,7 +2,7 @@
 clipboard_control write-clipboard write-primary read-clipboard read-primary
 
 # Font
-font_family Iosevka Term
+# font_family Iosevka Term
 font_size 22
 
 # Colors
@@ -19,3 +19,11 @@ scrollback_lines 10000
 # # Zoom in / out like in apps
 map ctrl+equal increase_font_size
 map ctrl+minus decrease_font_size
+
+
+# BEGIN_KITTY_FONTS
+font_family      family="Iosevka Term"
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+# END_KITTY_FONTS

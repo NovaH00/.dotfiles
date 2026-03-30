@@ -1,18 +1,13 @@
 return {
   cmd = {
     "clangd",
+    "--background-index",
   },
-  filetypes = { "c", "cpp" },
+  filetypes = { "c", "cpp", "cuda" },
   root_markers = {
-    "compile_commands.json",
-    "platformio.ini",
+    "platformio.ini", 
     ".git",
-  },
-  settings = {
-    clangd = {
-      fallbackFlags = {
-        "-std=gnu++17",
-      },
-    },
+    ".clangd",
+    "compile_commands.json",
   },
 }

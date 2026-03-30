@@ -134,6 +134,7 @@ SAVEHIST=1000
 export GLFW_IM_MODULE=ibus
 
 # Local binaries
+export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$HOME/go/bin:$PATH"
@@ -154,8 +155,15 @@ export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export EDITOR="/opt/nvim-linux-x86_64/bin/nvim"
 
+# Huggingface cache
+export HF_HOME="$HOME/.cache/huggingface"
+
 # llama.cpp
 export PATH="$PATH:/opt/llama.cpp/build/bin"
+export LLAMA_CACHE="$HOME/.cache/huggingface/hub"
+
+# opencode
+export PATH="/home/nova/.opencode/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -239,3 +247,7 @@ function cpx {
         return 1
     fi
 }
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+

@@ -25,3 +25,10 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
     })
   end,
 })
+
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+  end,
+})
