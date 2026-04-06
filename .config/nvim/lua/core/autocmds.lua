@@ -32,3 +32,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    -- Map <CR> (Enter) to jump but keep focus in quickfix
+    vim.keymap.set("n", "<CR>", function()
+      -- Execute the standard jump command
+      vim.cmd(".cc") 
+      -- Switch focus back to the previous window (the quickfix window)
+      vim.cmd("wincmd p") 
+    end, { buffer = true, silent = true })
+  end,
+})

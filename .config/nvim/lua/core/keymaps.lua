@@ -12,8 +12,9 @@ vim.keymap.set('n', '<S-Tab>', '<<', { noremap = true, silent = true })
 vim.keymap.set('v', '<S-Tab>', '<gv', { noremap = true, silent = true })
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true })
-vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { noremap = true, silent = true })
+vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { noremap = true, silent = true })
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { noremap = true, silent = true })
+vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true })
 
 vim.keymap.set({ "n", "v" }, "gl", "g_", { noremap = true, silent = true })
 vim.keymap.set({ "n", "v" }, "gh", "0",  { noremap = true, silent = true })
