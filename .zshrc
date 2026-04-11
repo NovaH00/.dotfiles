@@ -1,8 +1,6 @@
 setopt LOCAL_OPTIONS
 
-export PATH="$HOME/.local/bin:$PATH"
-
-calen view 124000095
+/home/nova/Programming/lhu-calendar/dist/calen view 124000095
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -162,6 +160,8 @@ export HF_HOME="$HOME/.cache/huggingface"
 export PATH="$PATH:/opt/llama.cpp/build/bin"
 export LLAMA_CACHE="$HOME/.cache/huggingface/hub"
 
+export PATH="$PATH:/opt/mistral.rs/target/release"
+
 # opencode
 export PATH="/home/nova/.opencode/bin:$PATH"
 
@@ -173,6 +173,7 @@ export NVM_DIR="$HOME/.nvm"
 alias ls='eza -rlgh -s modified --smart-group --group-directories-first --time-style="+%d/%m/%y %H:%M:%S"'
 alias lss='eza -rlgh -s modified --smart-group --group-directories-first --total-size --time-style="+%d/%m/%y %H:%M:%S"'
 alias rm='print -rP "%F{red}rm is disabled.%f Use %F{green}trash-put%f instead. Bypass using %F{yellow}\\rm%f" >&2; false'
+alias pytorch='source ~/.virtualenvs/pytorch/.venv/bin/activate'
 
 # User's commands
 function cpo {
@@ -249,5 +250,3 @@ function cpx {
 }
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
-
-
