@@ -3,6 +3,7 @@ return {
   dependencies = {
     "telescope.nvim"
   },
+  dir = "/home/nova/Programming/99",
   config = function()
     local _99 = require("99")
 
@@ -12,8 +13,8 @@ return {
     local cwd = vim.uv.cwd()
     local basename = vim.fs.basename(cwd)
     _99.setup({
-      -- provider = _99.Providers.ClaudeCodeProvider,  -- default: OpenCodeProvider
-      model = "opencode/big-pickle",
+      provider = _99.Providers.PiProvider,
+      model = "llama.cpp/local-model",      
       logger = {
         level = _99.DEBUG,
         path = "/tmp/" .. basename .. ".99.debug",
