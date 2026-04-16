@@ -3,14 +3,14 @@ return {
   event = "InsertEnter",
   config = function()
     require("lsp_signature").setup({
-      bind = true,                -- Mandatory, auto binds to LSP
-      floating_window = true,     -- Show signature in a floating window
+      bind = true,                
+      floating_window = true,     
       hint_prefix = "", 
       handler_opts = {
-        border = "rounded"        -- Rounded border for floating window
+        border = "rounded"        
       },
-      zindex = 50,                -- Make sure it appears above other windows
-      extra_trigger_chars = {","}, -- Trigger on comma too
+      zindex = 50,                
+      extra_trigger_chars = {","},
       always_trigger = true, 
     })
   end
