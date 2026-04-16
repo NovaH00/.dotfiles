@@ -128,8 +128,7 @@ SAVEHIST=1000
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# kitty needs this to have Vietnamese support 
-export GLFW_IM_MODULE=ibus
+export TERM=xterm-256color
 
 # Local binaries
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
@@ -157,13 +156,13 @@ export EDITOR="/opt/nvim-linux-x86_64/bin/nvim"
 export HF_HOME="$HOME/.cache/huggingface"
 
 # llama.cpp
-export PATH="$PATH:/opt/llama.cpp/build/bin"
+export PATH="$PATH:$HOME/opt/llama.cpp/build/bin"
 export LLAMA_CACHE="$HOME/.cache/huggingface/hub"
 
 export PATH="$PATH:/opt/mistral.rs/target/release"
 
 # opencode
-export PATH="/home/nova/.opencode/bin:$PATH"
+export PATH="$HOME/.opencode/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -174,6 +173,7 @@ alias ls='eza -rlgh -s modified --smart-group --group-directories-first --time-s
 alias lss='eza -rlgh -s modified --smart-group --group-directories-first --total-size --time-style="+%d/%m/%y %H:%M:%S"'
 alias rm='print -rP "%F{red}rm is disabled.%f Use %F{green}trash-put%f instead. Bypass using %F{yellow}\\rm%f" >&2; false'
 alias pytorch='source ~/.virtualenvs/pytorch/.venv/bin/activate'
+alias rpython="$HOME/opt/RustPython/target/release/rustpython"
 
 # User's commands
 function cpo {
