@@ -5,16 +5,6 @@ return {
   },
 
   config = function()
-    -- Helper to display path in the window bar
-    function _G.get_oil_winbar()
-      local dir = require("oil").get_current_dir()
-      if dir then
-        return vim.fn.fnamemodify(dir, ":p")
-      else
-        return vim.api.nvim_buf_get_name(0)
-      end
-    end
-
     -- Toggle Keymap (Global)
     vim.keymap.set("n", "<C-p>", function()
       if vim.bo.filetype == "oil" then
@@ -24,11 +14,37 @@ return {
       end
     end, { desc = "Toggle Oil" })
 
+    function _G.get_oil_winbar()
+      local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
+      local dir = require("oil").get_current_dir(bufnr)
+
+      local path = ""
+      if dir then
+        path = vim.fn.fnamemodify(dir, ":~")
+      else
+        path = vim.api.nvim_buf_get_name(bufnr)
+      end
+
+      return "%#OilWinBarPath# " .. path .. " %*"
+    end
+
+    vim.api.nvim_set_hl(0, "OilWinBarPath", { 
+      bg = "NONE",          
+      fg = "#da7754",      
+      bold = true 
+    })
+    -- Force the entire winbar's empty space to look like the main buffer background
+    vim.api.nvim_set_hl(0, "WinBar", { link = "Normal" })
+    vim.api.nvim_set_hl(0, "WinBarNC", { link = "Normal" })
+
     require("oil").setup({
       default_file_explorer = true,
       delete_to_trash = true,
       skip_confirm_for_simple_edits = false,
 
+      win_options = {
+        winbar = "%!v:lua.get_oil_winbar()",
+      },
       -- COLUMNS CONFIGURATION
       columns = {
         "permissions",
@@ -38,11 +54,6 @@ return {
           format = "%d/%m/%y-%H:%M:%S", 
         },
         "icon",
-      },
-
-      -- Winbar to show the path at the top
-      win_options = {
-        winbar = "%!v:lua.get_oil_winbar()",
       },
 
       -- Layout & View
@@ -57,7 +68,7 @@ return {
       },
 
       view_options = {
-        show_hidden = true,
+        show_hidden = false,
         -- Sort: Directories (type) first, then Name
         sort = {
           { "type", "asc" },

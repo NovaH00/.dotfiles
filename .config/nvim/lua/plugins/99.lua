@@ -25,7 +25,7 @@ return {
       -- and generation will fail refer to tool documentation to resolve
       -- https://opencode.ai/docs/permissions/#external-directories
       -- https://code.claude.com/docs/en/permissions#read-and-edit
-      tmp_dir = "/tmp/nvim-99/",
+      tmp_dir = ".tmp/nvim-99/",
 
       --- Completions: #rules and @files in the prompt buffer
       completion = {
@@ -88,20 +88,20 @@ return {
     --
     -- likely ill add a mode check and assert on required visual mode
     -- so just prepare for it now
-    vim.keymap.set("v", "<leader>9v", function()
+    vim.keymap.set("v", "mv", function()
       _99.visual()
     end)
 
     --- if you have a request you dont want to make any changes, just cancel it
-    vim.keymap.set("n", "<leader>9x", function()
+    vim.keymap.set("n", "mx", function()
       _99.stop_all_requests()
     end)
 
-    vim.keymap.set("n", "<leader>9s", function()
+    vim.keymap.set("n", "ms", function()
       _99.search()
     end)
 
-    vim.keymap.set("n", "<leader>9m", function()
+    vim.keymap.set("n", "mm", function()
       require("99.extensions.telescope").select_model()
     end)
   end,
