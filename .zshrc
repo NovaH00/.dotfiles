@@ -128,6 +128,10 @@ SAVEHIST=1000
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 export TERM=xterm-256color
 
 # Local binaries
@@ -135,14 +139,7 @@ export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$HOME/go/bin:$PATH"
-
-# NPM system path
 export PATH="$HOME/.npm-global/bin:$PATH"
-
-# Enable Vietnamese typing everywhere
-export GTK_IM_MODULE=ibus
-export QT_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
 
 # Cuda toolkit
 export PATH="/usr/local/cuda/bin:$PATH"
@@ -159,14 +156,12 @@ export HF_HOME="$HOME/.cache/huggingface"
 export PATH="$PATH:$HOME/opt/llama.cpp/build/bin"
 export LLAMA_CACHE="$HOME/.cache/huggingface/hub"
 
+# mistral.rs
 export PATH="$PATH:/opt/mistral.rs/target/release"
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # User's aliases
 alias ls='eza -rlgh -s modified --smart-group --group-directories-first --time-style="+%d/%m/%y %H:%M:%S"'
@@ -177,25 +172,21 @@ alias rpython="$HOME/opt/RustPython/target/release/rustpython"
 
 # User's commands
 function cpo {
-    # Command to copy the piped data to the clipboard
-    
-    # Check if stdin is a terminal (no pipe provided)
-    if [[ -t 0 ]]; then
-        echo "Error: 'cpo' expects input from a pipe. Usage: command | cpo" >&2
-        return 1
-    fi
+    {
+        if [[ -t 0 ]]; then
+            echo "Error: 'cpo' expects input from a pipe. Usage: command | cpo"
+            return 1
+        fi
 
-    # Read stdin into a variable
-    local content
-    content=$(cat)
-    
-    # Copy to clipboard
-    echo -n "$content" | xclip -selection clipboard
-    
-    # Calculate count
-    local count=$(echo -n "$content" | wc -m | tr -d '[:space:]')
+        local content
+        content=$(cat)
 
-    echo "Copied $count characters to clipboard." >&2
+        echo -n "$content" | xclip -selection clipboard
+
+        local count=$(echo -n "$content" | wc -m | tr -d '[:space:]')
+
+        echo "Copied $count characters to clipboard."
+    } 2>&1
 }
 
 function cpi {
