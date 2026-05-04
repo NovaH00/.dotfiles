@@ -3,26 +3,7 @@ return {
     "Vigemus/iron.nvim",
     config = function()
       local iron = require("iron.core")
-
-      -- Python REPL fallback resolver
-      local function python_repl()
-        if vim.fn.executable("uv") == 1 then
-          if vim.fn.executable("ipython") == 1 then
-            return { "uv", "run", "ipython" }
-          end
-          return { "uv", "run", "python" }
-        end
-
-        if vim.fn.executable("ipython") == 1 then
-          return { "ipython" }
-        end
-
-        if vim.fn.executable("python3") == 1 then
-          return { "python3" }
-        end
-
-        return { "python" }
-      end
+      local view = require("iron.view")
 
       iron.setup({
         config = {
@@ -31,10 +12,10 @@ return {
               command = {"zsh"}
             },
             python = {
-              command = python_repl()
+              command = { "uv", "run", "ipython" }
             }
           },
-          repl_open_cmd = "vertical botright 60 split"
+          repl_open_cmd = view.split.vertical.botright(0.45),
         },
         keymaps = {
           send_motion = "<space>sc",

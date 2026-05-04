@@ -14,18 +14,18 @@ return {
         backend = "kitty",
         processor = "magick_rock",
         integrations = {
-          -- FIX: This stops images from showing up inside markdown links
           markdown = {
             enabled = false,
           },
-          -- Also disabling others you likely don't want auto-rendering in
           neorg = { enabled = false },
           typst = { enabled = false },
           html = { enabled = false },
           css = { enabled = false },
         },
-        -- Optional: Adjust how images look when you open an actual image file
-        max_height_window_percentage = 50,
+        max_width = 100, -- tweak to preference
+        max_height = 12, -- ^
+        max_height_window_percentage = math.huge, -- this is necessary for a good experience
+        max_width_window_percentage = math.huge,
       })
     end,
   },

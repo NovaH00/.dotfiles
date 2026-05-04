@@ -35,3 +35,8 @@ vim.keymap.set('n', '<C-l>', '<C-i>', { noremap = true, silent = true })
 vim.keymap.set("n", "H", function()
   require("oil").toggle_hidden()
 end, { desc = "Oil: toggle hidden files" })
+
+vim.keymap.set("x", "p", '"_dp', { desc = "Paste without overwriting register" })
+vim.keymap.set("n", "x", '"_x', { desc = "Delete char without yanking (black hole)" })
+vim.keymap.set("x", "x", '"_d', { desc = "Delete selection without yanking (black hole)" })
+vim.keymap.set("n", "xx", '"_dd', { desc = "Delete the line without yanking (black hole)" })

@@ -4,7 +4,10 @@ return {
     require('lspsaga').setup({
       symbol_in_winbar = {
         enable = false, 
-      }
+      },
+      lightbulb = {
+        enable = false,  -- 👈 disable the bulb
+      },
     })
     vim.keymap.set('n', 'K', '<CMD>Lspsaga hover_doc<CR>')
   end,

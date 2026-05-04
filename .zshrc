@@ -241,3 +241,12 @@ function cpx {
 }
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+clam() {
+    if [[ "$1" == "run" ]]; then
+        output=$(command clam "$@")
+        eval "$output"
+    else
+        command clam "$@"
+    fi
+}
