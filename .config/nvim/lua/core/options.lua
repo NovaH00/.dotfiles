@@ -11,16 +11,9 @@ vim.opt.autoread = true
 vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 5
 vim.opt.list = true
-vim.opt.listchars = {
-  space = "·",
-  tab = "»·",
-  trail = "·",
-  extends = ">",
-  precedes = "<",
-}
 
 vim.o.foldmethod = "indent"
-vim.o.foldlevel = 99  
+vim.o.foldlevel = 99
 vim.o.foldenable = true
 
 vim.g.clipboard = {
