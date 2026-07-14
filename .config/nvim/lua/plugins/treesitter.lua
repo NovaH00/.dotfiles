@@ -19,14 +19,7 @@ return {
       "dockerfile",
     }
 
-    local installed = ts.get_installed()
-    local missing = vim.tbl_filter(function(parser)
-      return not vim.tbl_contains(installed, parser)
-    end, ensure_installed)
-
-    if #missing > 0 then
-      ts.install(missing)
-    end
+    ts.install(ensure_installed)
 
     local ts_highlight_group = vim.api.nvim_create_augroup(
       "TreesitterHighlight",
