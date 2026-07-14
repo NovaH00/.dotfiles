@@ -137,9 +137,13 @@ export TERM=xterm-256color
 # Local binaries
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$PATH:/usr/local/go/bin"
-export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.npm-global/bin:$PATH"
+
+# Go
+export PATH="$PATH:/usr/local/go/bin"
+export GOPATH="$HOME/.local/share/go"
+export GOBIN="$HOME/.local/share/go/bin"
+export PATH="$GOBIN:$PATH"
 
 # Cuda toolkit
 export PATH="/usr/local/cuda/bin:$PATH"
@@ -153,7 +157,7 @@ export EDITOR="/opt/nvim-linux-x86_64/bin/nvim"
 export HF_HOME="$HOME/.cache/huggingface"
 
 # llama.cpp
-export PATH="$PATH:$HOME/opt/llama.cpp/build/bin"
+export PATH="$PATH:$HOME/src/llama.cpp/build/bin"
 export LLAMA_CACHE="$HOME/.cache/huggingface/hub"
 
 # mistral.rs
@@ -162,6 +166,10 @@ export PATH="$PATH:/opt/mistral.rs/target/release"
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
 
+# dotnet
+export DOTNET_ROOT="$HOME/.dotnet"
+export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
+export DOTNET_ROOT_X64="$HOME/.dotnet"
 
 # User's aliases
 alias ls='eza -rlgh -s modified --smart-group --group-directories-first --time-style="+%d/%m/%y %H:%M:%S"'
@@ -207,7 +215,7 @@ function cpi {
     # 2. Run the command with its arguments
     "$paste_cmd" "${paste_args[@]}"
     echo "\n"
-} 
+}
 
 function cpx {
     # 1. Get the command from the clipboard
@@ -223,12 +231,12 @@ function cpx {
     # 3. Print the warning in bold red
     echo -e "\e[1;31mWARNING: About to execute:\e[0m" >&2
     echo "  $cmd_to_run" >&2
-    
+
     # 4. Prompt and wait for the user to type 'y' or 'n' AND press Enter
     echo -n "Execute this command? [y/N]: " >&2
     local confirm
     read confirm
-    
+
     # 5. Check the result
     # We use [[ "$confirm" =~ ^[yY]$ ]] to match only 'y' or 'Y'
     if [[ "$confirm" =~ ^[yY]$ ]]; then
@@ -241,12 +249,3 @@ function cpx {
 }
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
-
-# clam() {
-#     if [[ "$1" == "run" ]]; then
-#         output=$(command clam "$@")
-#         eval "$output"
-#     else
-#         command clam "$@"
-#     fi
-# }

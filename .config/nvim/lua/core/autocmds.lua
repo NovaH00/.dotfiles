@@ -9,7 +9,6 @@ vim.api.nvim_create_autocmd({ "VimEnter", "BufEnter" }, {
         if vim.fn.isdirectory(path) == 1 then
           -- Execute 'touch' on the directory to update mtime
             os.execute("touch " .. vim.fn.shellescape(path))
-          
         end
     end,
 })

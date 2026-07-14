@@ -1,34 +1,22 @@
--- return {
---   cmd = {
---     "basedpyright-langserver",
---     "--stdio",
---   },
---   filetypes = { "python" },
---   root_markers = {
---     "pyproject.toml",
---     "setup.py",
---     "setup.cfg",
---     "requirements.txt",
---     ".git",
---     ".basedpyrightconfig.json",
---   },
---   settings = {
---     basedpyright = {
---       analysis = {
---         diagnosticSeverityOverrides = {
---           reportIgnoreCommentWithoutRule = "none",
---           reportUnknownVariableType = "none",
---           reportMissingTypeStubs = "none",
---           reportUnusedCallResult = "none",
---           reportPrivateImportUsage = "none",
---           reportMissingTypeArgument = "none",
---           reportUnknownMemberType = "none",
---           reportUnannotatedClassAttribute = "none",
---           reportUnknownParameterType = "none",
---           reportExplicitAny = "none",
---           reportAny = "none"
---         },
---       },
---     },
---   },
--- }
+return {
+  cmd = {
+    "basedpyright-langserver",
+    "--stdio",
+  },
+  filetypes = { "python" },
+  root_markers = {
+    "pyproject.toml",
+    "setup.py",
+    "setup.cfg",
+    "requirements.txt",
+    ".git",
+    ".basedpyrightconfig.json",
+  },
+  settings = {
+    basedpyright = {
+      analysis = {
+        typeCheckingMode = "basic",
+      },
+    },
+  },
+}
