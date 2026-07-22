@@ -44,3 +44,15 @@ vim.api.nvim_create_autocmd("FileType", {
     end, { buffer = true, silent = true })
   end,
 })
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = vim.api.nvim_create_augroup("TerminalSettings", { clear = true }),
+  callback = function()
+    -- Disables the horizontal line highlight
+    vim.opt_local.cursorline = false
+    -- Disables the vertical margin column line
+    vim.opt_local.colorcolumn = ""
+    -- Disables standard Neovim syntax highlighting
+    vim.opt_local.syntax = "off"
+  end,
+})

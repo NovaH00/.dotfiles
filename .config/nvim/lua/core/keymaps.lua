@@ -1,5 +1,6 @@
 -- Allow wrapping at the start/end of the line
-vim.opt.whichwrap:append('<,>,[,],h,l')  
+vim.opt.whichwrap:append('<,>,[,],h,l')
+
 --Toggle wrapping
 vim.api.nvim_set_keymap('n', '<leader>w', ':set wrap!<CR>', { noremap = true, silent = true })
 
