@@ -1,6 +1,6 @@
 setopt LOCAL_OPTIONS
 
-/home/nova/Programming/lhu-calendar/dist/calen view 124000095
+/home/nova/src/programming/lhu-calendar/dist/calen view 124000095
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -169,7 +169,6 @@ export PATH="$HOME/.opencode/bin:$PATH"
 # dotnet
 export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
-export DOTNET_ROOT_X64="$HOME/.dotnet"
 
 # User's aliases
 alias ls='eza -rlgh -s modified --smart-group --group-directories-first --time-style="+%d/%m/%y %H:%M:%S"'
