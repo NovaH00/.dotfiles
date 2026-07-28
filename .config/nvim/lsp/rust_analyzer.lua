@@ -1,5 +1,5 @@
 return {
-  cmd = { "rust-analyzer" },
+  cmd = { vim.fn.expand("~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer") },
   filetypes = { "rust" },
   settings = {
     ["rust-analyzer"] = {

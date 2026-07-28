@@ -170,6 +170,10 @@ export PATH="$HOME/.opencode/bin:$PATH"
 export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
 
+# Rust esp32 toolchains
+export LIBCLANG_PATH="/home/nova/.rustup/toolchains/esp/xtensa-esp32-elf-clang/esp-20.1.1_20250829/esp-clang/lib"
+export PATH="/home/nova/.rustup/toolchains/esp/xtensa-esp-elf/esp-15.2.0_20250920/xtensa-esp-elf/bin:$PATH"
+
 # User's aliases
 alias ls='eza -rlgh -s modified --smart-group --group-directories-first --time-style="+%d/%m/%y %H:%M:%S"'
 alias lss='eza -rlgh -s modified --smart-group --group-directories-first --total-size --time-style="+%d/%m/%y %H:%M:%S"'
@@ -248,3 +252,14 @@ function cpx {
 }
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+
+# record a binary execution and immediatly run gf2
+gf2-rr() {
+    if [ -z "$1" ]; then
+        echo "Usage: gf2-rr <path_to_binary> [arguments]"
+        return 1
+    fi
+    pcores="$(cat /sys/devices/cpu_core/cpus)"
+    taskset -c "$pcores" rr record "$@" && gf2 --rr-replay
+}

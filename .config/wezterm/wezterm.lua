@@ -3,9 +3,12 @@ local wezterm = require("wezterm")
 return {
     -- Allows Ibus Vietnamese
     use_ime = true,
+    xim_im_name = "ibus",
 
     -- Font
-    font = wezterm.font("IosevkaTerm Nerd Font Mono"),
+    font = wezterm.font("IosevkaTerm Nerd Font Mono", {
+      weight = "Medium",
+    }),
     font_size = 22.0,
 
     -- Window size

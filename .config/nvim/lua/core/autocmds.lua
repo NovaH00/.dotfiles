@@ -56,3 +56,33 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.opt_local.syntax = "off"
   end,
 })
+
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+    pattern = "grep",
+    callback = function()
+        vim.cmd("cclose") -- just in case
+        vim.cmd("botright copen")
+        vim.cmd("wincmd p")
+        vim.cmd("quit")
+    end,
+})
+
+vim.api.nvim_create_autocmd("BufLeave", {
+    callback = function(args)
+        local bufnr = args.buf
+
+        if vim.bo[bufnr].buftype ~= "terminal" then
+            return
+        end
+
+        -- Only close finished terminals
+        local job = vim.b[bufnr].terminal_job_id
+        if job and vim.fn.jobwait({ job }, 0)[1] ~= -1 then
+            vim.schedule(function()
+                if vim.api.nvim_buf_is_valid(bufnr) then
+                    pcall(vim.api.nvim_buf_delete, bufnr, { force = true })
+                end
+            end)
+        end
+    end,
+})
