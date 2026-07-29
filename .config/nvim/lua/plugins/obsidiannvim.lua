@@ -4,6 +4,7 @@ return {
   ---@module 'obsidian'
   ---@type obsidian.config
   opts = {
+    ui = { enable = false },
     legacy_commands = false, -- this will be removed in 4.0.0
     note_id_func = function(title, dir)
       return require("obsidian.builtin").title_id(title, dir)
@@ -22,17 +23,35 @@ return {
     commands.commands["new"].complete = function(_, cmdline)
       local vault = "/home/nova/vault"
       local partial = cmdline:match("^%S+%s+new%s+(.*)$") or ""
-      local dir, prefix = vault, partial
-      if partial:find("/") then
-        local parent = partial:match("^(.*/)")
-        dir = vault .. "/" .. parent:sub(1, -2)
-        prefix = partial:sub(#parent + 1)
-      end
+      local unescaped = partial:gsub("\\([ ,\t])", "%1")
+      local parent = unescaped:match("^(.*/)") or ""
+      local dir = parent ~= "" and (vault .. "/" .. parent:sub(1, -2)) or vault
+      local prefix = parent ~= "" and unescaped:sub(#parent + 1) or unescaped
       local results = {}
       local ok, iter = pcall(vim.fs.dir, dir)
       if ok then
         for name, type in iter do
-          if name:sub(1, #prefix) == prefix then
+         if name:sub(1, 1) ~= "." and name:sub(1, #prefix) == prefix then
+            local entry = (partial:match("^(.*/)") or "") .. name
+            table.insert(results, entry)
+          end
+        end
+      end
+      return results
+    end
+
+    commands.commands["open"].complete = function(_, cmdline)
+      local vault = "/home/nova/vault"
+      local partial = cmdline:match("^%S+%s+open%s+(.*)$") or ""
+      local unescaped = partial:gsub("\\([ ,\t])", "%1")
+      local parent = unescaped:match("^(.*/)") or ""
+      local dir = parent ~= "" and (vault .. "/" .. parent:sub(1, -2)) or vault
+      local prefix = parent ~= "" and unescaped:sub(#parent + 1) or unescaped
+      local results = {}
+      local ok, iter = pcall(vim.fs.dir, dir)
+      if ok then
+        for name, type in iter do
+          if name:sub(1, 1) ~= "." and name:sub(1, #prefix) == prefix then
             local entry = (partial:match("^(.*/)") or "") .. name
             table.insert(results, entry)
           end
