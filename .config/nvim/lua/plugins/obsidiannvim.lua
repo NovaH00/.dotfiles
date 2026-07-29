@@ -34,7 +34,6 @@ return {
         for name, type in iter do
           if name:sub(1, #prefix) == prefix then
             local entry = (partial:match("^(.*/)") or "") .. name
-            if type == "directory" then entry = entry .. "/" end
             table.insert(results, entry)
           end
         end
