@@ -1,27 +1,3 @@
-local bufnr = vim.api.nvim_get_current_buf()
-vim.keymap.set(
-  "n",
-  "<leader>a",
-  function()
-    vim.cmd.RustLsp('codeAction') -- supports rust-analyzer's grouping
-    -- or vim.lsp.buf.codeAction() if you don't want grouping.
-  end,
-  { silent = true, buffer = bufnr }
-)
-
-vim.keymap.set(
-  "n",
-  "K",  -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
-  function()
-    vim.cmd.RustLsp({'hover', 'actions'})
-  end,
-  { silent = true, buffer = bufnr }
-)
-
--- vim.keymap.set("n", "me", function()
---     vim.cmd.RustLsp("expandMacro")
--- end, { desc = "Expand Rust macro" })
-
 vim.keymap.set("n", "me", function()
     local clients = vim.lsp.get_clients({ bufnr = 0, name = "rust-analyzer" })
     local client = clients[1]
