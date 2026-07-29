@@ -8,8 +8,23 @@ return {
             },
         })
 
-        local mason_lsp = require("mason-lspconfig")
-        mason_lsp.setup({
+        vim.lsp.config("*", {
+            capabilities = vim.tbl_deep_extend(
+                "force",
+                vim.lsp.protocol.make_client_capabilities(),
+                {
+                    textDocument = {
+                        completion = {
+                            completionItem = {
+                                snippetSupport = false,
+                            },
+                        },
+                    },
+                }
+            ),
+        })
+
+        require("mason-lspconfig").setup({
             ensure_installed = {
                 "basedpyright",
                 "clangd",
@@ -18,8 +33,5 @@ return {
                 "ts_ls",
             },
         })
-
-        local mason_lsp = require("mason-lspconfig")
     end,
 }
-

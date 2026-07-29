@@ -6,6 +6,15 @@ return {
     vim.g.rustaceanvim = {
       server = {
         cmd = { "env", "RUSTUP_TOOLCHAIN=stable", "rust-analyzer" },
+        capabilities = {
+          textDocument = {
+            completion = {
+              completionItem = {
+                snippetSupport = false,
+              },
+            },
+          },
+        },
       },
       tools = {
         hover_actions = {

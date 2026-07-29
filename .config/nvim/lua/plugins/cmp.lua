@@ -13,16 +13,14 @@ return {
 
     opts.completion = {
       completeopt = "menu,menuone,noinsert,noselect",
-    }
-    opts.sources = cmp.config.sources({
-      { name = "nvim_lsp" }, 
-      { name = "buffer" },   
-      { name = "path" },    
-    })
-
-    opts.completion = {
       autocomplete = { cmp.TriggerEvent.TextChanged },
     }
+
+    opts.sources = cmp.config.sources({
+      { name = "nvim_lsp" },
+      { name = "buffer" },
+      { name = "path" },
+    })
 
     local has_words_before = function()
       unpack = unpack or table.unpack
@@ -34,8 +32,6 @@ return {
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        elseif vim.snippet.active({ direction = 1 }) then
-          vim.schedule(function() vim.snippet.jump(1) end)
         elseif has_words_before() then
           cmp.complete()
         else
@@ -45,8 +41,6 @@ return {
       ["<S-Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
-        elseif vim.snippet.active({ direction = -1 }) then
-          vim.schedule(function() vim.snippet.jump(-1) end)
         else
           fallback()
         end
