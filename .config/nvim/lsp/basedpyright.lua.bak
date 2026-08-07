@@ -15,7 +15,8 @@ return {
   settings = {
     basedpyright = {
       analysis = {
-        typeCheckingMode = "basic",
+        typeCheckingMode = "standard",
+        diagnosticMode = "openFilesOnly",
       },
     },
   },

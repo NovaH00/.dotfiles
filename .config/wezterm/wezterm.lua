@@ -1,29 +1,29 @@
 local wezterm = require("wezterm")
+local mux = wezterm.mux
 
-return {
-    -- Allows Ibus Vietnamese
-    use_ime = true,
-    xim_im_name = "ibus",
 
-    -- Font
-    font = wezterm.font("IosevkaTerm Nerd Font Mono", {
-      weight = "Medium",
-    }),
-    font_size = 22.0,
+local config = wezterm.config_builder()
 
-    -- Window size
-    initial_cols = 164,
-    initial_rows = 25,
+-- Allows Ibus Vietnamese
+config.use_ime = true
+config.xim_im_name = "ibus"
 
-    -- Theme
-    color_scheme = "Gruber (base16)",
+-- Font
+config.font = wezterm.font("IosevkaTerm Nerd Font Mono", {
+  weight = "Medium",
+})
+config.font_size = 22.0
 
-    -- Working directory
-    default_cwd = wezterm.home_dir,
+-- Theme
+config.color_scheme = "Gruber (base16)"
 
-    -- Window behavior
-    window_close_confirmation = "NeverPrompt",
+-- Window behavior
+config.window_close_confirmation = "NeverPrompt"
 
-    -- Optional quality-of-life
-    enable_tab_bar = false,
-}
+-- Optional quality-of-life
+config.enable_tab_bar = false
+
+config.initial_rows = 100
+config.initial_cols = 205
+
+return config

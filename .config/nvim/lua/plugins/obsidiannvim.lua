@@ -4,7 +4,6 @@ return {
   ---@module 'obsidian'
   ---@type obsidian.config
   opts = {
-    ui = { enable = false },
     legacy_commands = false, -- this will be removed in 4.0.0
     note_id_func = function(title, dir)
       return require("obsidian.builtin").title_id(title, dir)

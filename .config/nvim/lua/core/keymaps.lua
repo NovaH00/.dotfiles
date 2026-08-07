@@ -44,3 +44,7 @@ vim.keymap.set("n", "xx", '"_dd', { desc = "Delete the line without yanking (bla
 
 -- Press t in normal mode to run terminal command
 vim.keymap.set("n", "t", ":term ", { noremap = true })
+
+vim.keymap.set("n", "K", function()
+  vim.lsp.buf.hover({ border = "rounded" })
+end, { desc = "LSP hover" })
