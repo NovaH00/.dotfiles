@@ -13,8 +13,11 @@ return {
       "go",
       "c",
       "cpp",
+      "kotlin",
       "javascript",
       "typescript",
+      "c_sharp",
+      "java",
       "make",
       "dockerfile",
     }
