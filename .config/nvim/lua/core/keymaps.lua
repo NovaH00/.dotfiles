@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 -- Allow wrapping at the start/end of the line
 vim.opt.whichwrap:append('<,>,[,],h,l')
 
@@ -26,7 +28,7 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- LSP diagnostic
 vim.keymap.set('n', '<A-d>', vim.diagnostic.open_float, { noremap = true, silent = true })
 
--- ESC to escape terminal mode 
+-- ESC to escape terminal mode
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 
 -- Ctrl + l to jump forward instead of Ctrl + i
@@ -37,7 +39,7 @@ vim.keymap.set("n", "H", function()
   require("oil").toggle_hidden()
 end, { desc = "Oil: toggle hidden files" })
 
-vim.keymap.set("x", "p", '"_dp', { desc = "Paste without overwriting register" })
+vim.keymap.set("x", "p", '"_dP', { desc = "Paste without overwriting register" })
 vim.keymap.set("n", "x", '"_x', { desc = "Delete char without yanking (black hole)" })
 vim.keymap.set("x", "x", '"_d', { desc = "Delete selection without yanking (black hole)" })
 vim.keymap.set("n", "xx", '"_dd', { desc = "Delete the line without yanking (black hole)" })
@@ -48,3 +50,15 @@ vim.keymap.set("n", "t", ":term ", { noremap = true })
 vim.keymap.set("n", "K", function()
   vim.lsp.buf.hover({ border = "rounded" })
 end, { desc = "LSP hover" })
+
+-- gf to jump to a file with the file:col:row format
+vim.keymap.set("n", "gf", "gF")
+vim.keymap.set("n", "gF", "gf")
+
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+vim.keymap.set("n", "J", "mzJ`z")
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
