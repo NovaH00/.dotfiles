@@ -1,5 +1,9 @@
-require("core.options")
-require("core.keymaps")
-require("core.autocmds")
-require("core.usercmds")
-require("lazy_setup")
+vim.g.mapleader = ' '
+
+require('config.options')
+require('config.keymaps')
+require('config.ftplugin')
+require('config.autocmds')
+require('config.commands')
+require('config.lsp')
+require('config.lazy')
