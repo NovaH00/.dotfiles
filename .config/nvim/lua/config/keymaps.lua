@@ -16,7 +16,6 @@ map('t', '<Esc>', '<C-\\><C-n>', { desc = 'Leave terminal insert mode' })
 
 map('n', '<C-l>', '<C-i>', { desc = 'Jump forward (like <C-i>)' })
 
-map('x', 'p', '"_dP', { desc = 'Paste without overwriting register' })
 map('n', 'x', '"_x', { desc = 'Delete char to black hole register' })
 map('x', 'x', '"_d', { desc = 'Delete selection to black hole register' })
 map('n', 'xx', '"_dd', { desc = 'Delete line to black hole register' })
