@@ -26,4 +26,6 @@ config.enable_tab_bar = false
 config.initial_rows = 100
 config.initial_cols = 205
 
+config.warn_about_missing_glyphs = false
+
 return config

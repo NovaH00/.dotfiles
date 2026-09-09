@@ -1,6 +1,7 @@
 setopt LOCAL_OPTIONS
+zstyle ':completion:*' matcher-list ''
 
-/home/nova/src/programming/lhu-calendar/dist/calen view 124000095
+$HOME/src/programming/lhu-calendar/dist/calen view 124000095
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -157,11 +158,14 @@ export EDITOR="/opt/nvim-linux-x86_64/bin/nvim"
 export HF_HOME="$HOME/.cache/huggingface"
 
 # llama.cpp
-export PATH="$PATH:$HOME/src/llama.cpp/build/bin"
+export PATH="$PATH:$HOME/src/thirdparty/llama.cpp/build/bin"
 export LLAMA_CACHE="$HOME/.cache/huggingface/hub"
 
+# whisper.cpp
+export PATH="$PATH:$HOME/src/thirdparty/whisper.cpp/build/bin"
+
 # mistral.rs
-export PATH="$PATH:/opt/mistral.rs/target/release"
+export PATH="$PATH:$HOME/src/thirdparty/mistral.rs"
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
@@ -171,8 +175,14 @@ export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
 
 # Rust esp32 toolchains
-export LIBCLANG_PATH="/home/nova/.rustup/toolchains/esp/xtensa-esp32-elf-clang/esp-20.1.1_20250829/esp-clang/lib"
-export PATH="/home/nova/.rustup/toolchains/esp/xtensa-esp-elf/esp-15.2.0_20250920/xtensa-esp-elf/bin:$PATH"
+export LIBCLANG_PATH="$HOME/.rustup/toolchains/esp/xtensa-esp32-elf-clang/esp-20.1.1_20250829/esp-clang/lib"
+export PATH="$HOME/.rustup/toolchains/esp/xtensa-esp-elf/esp-15.2.0_20250920/xtensa-esp-elf/bin:$PATH"
+
+# Kotlin
+export PATH="$HOME/src/thirdparty/kotlinc/bin:$PATH"
+
+# Nim
+export PATH="$HOME/src/thirdparty/nim-2.2.10/bin:$PATH"
 
 # User's aliases
 alias ls='eza -rlgh -s modified --smart-group --group-directories-first --time-style="+%d/%m/%y %H:%M:%S"'
@@ -263,3 +273,7 @@ gf2-rr() {
     pcores="$(cat /sys/devices/cpu_core/cpus)"
     taskset -c "$pcores" rr record "$@" && gf2 --rr-replay
 }
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
