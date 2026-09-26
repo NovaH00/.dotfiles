@@ -35,3 +35,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('<A-d>', vim.diagnostic.open_float, 'Open diagnostic float')
   end,
 })
+
+local orig_open_floating_preview = vim.lsp.util.open_floating_preview
+vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+  if type(contents) == 'table' then
+    local in_code_block = false
+    for i, line in ipairs(contents) do
+      if line:match('^%s*```') then
+        in_code_block = not in_code_block
+      elseif not in_code_block then
+        contents[i] = line:gsub('\\_', '_')
+      end
+    end
+  end
+  return orig_open_floating_preview(contents, syntax, opts, ...)
+end

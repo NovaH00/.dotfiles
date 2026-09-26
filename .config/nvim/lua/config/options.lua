@@ -21,7 +21,6 @@ opt.splitright = true
 opt.equalalways = true
 
 opt.conceallevel = 2
-opt.concealcursor = "nc"
 opt.foldmethod = 'indent'
 opt.foldlevel = 99
 opt.foldenable = true
