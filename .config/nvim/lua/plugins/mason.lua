@@ -18,6 +18,7 @@ return {
         'ruff',
         'neocmake',
         'ts_ls',
+        'jdtls',
       },
       automatic_enable = {
         exclude = { 'rust_analyzer' },

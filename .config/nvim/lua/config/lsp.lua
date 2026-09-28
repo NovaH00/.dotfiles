@@ -50,3 +50,5 @@ vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
   end
   return orig_open_floating_preview(contents, syntax, opts, ...)
 end
+
+vim.lsp.enable('jdtls')

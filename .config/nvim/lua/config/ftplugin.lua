@@ -7,6 +7,7 @@ local indent = {
   rust = 4,
   kotlin = 4,
   typescript = 4,
+  java = 4,
 }
 
 local function apply_indent()
