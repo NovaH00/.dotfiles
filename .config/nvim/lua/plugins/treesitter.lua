@@ -20,6 +20,7 @@ return {
       "java",
       "make",
       "dockerfile",
+      "typst",
     }
 
     ts.install(ensure_installed)
