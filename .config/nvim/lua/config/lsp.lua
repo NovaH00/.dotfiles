@@ -33,6 +33,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.buf.hover({ border = 'rounded' })
     end, 'LSP hover')
     map('<A-d>', vim.diagnostic.open_float, 'Open diagnostic float')
+    vim.keymap.set({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, { buffer = buf, desc = 'LSP signature help' })
   end,
 })
 

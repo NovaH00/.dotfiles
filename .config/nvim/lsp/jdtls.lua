@@ -99,4 +99,14 @@ return {
   root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers1, root_markers2 }
     or vim.list_extend(root_markers1, root_markers2),
   init_options = {},
+  settings = {
+    java = {
+      signatureHelp = {
+        enabled = true,
+        description = {
+          enabled = true,
+        },
+      },
+    },
+  },
 }
