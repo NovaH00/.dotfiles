@@ -161,9 +161,6 @@ export HF_HOME="$HOME/.cache/huggingface"
 export PATH="$PATH:$HOME/src/thirdparty/llama.cpp/build/bin"
 export LLAMA_CACHE="$HOME/.cache/huggingface/hub"
 
-# whisper.cpp
-export PATH="$PATH:$HOME/src/thirdparty/whisper.cpp/build/bin"
-
 # mistral.rs
 export PATH="$PATH:$HOME/src/thirdparty/mistral.rs"
 

@@ -8,6 +8,7 @@ local indent = {
   kotlin = 4,
   typescript = 4,
   java = 4,
+  cs = 4,
 }
 
 local function apply_indent()
