@@ -1,7 +1,6 @@
 local wezterm = require("wezterm")
 local mux = wezterm.mux
 
-
 local config = wezterm.config_builder()
 
 -- Allows Ibus Vietnamese
@@ -13,6 +12,24 @@ config.font = wezterm.font("IosevkaTerm Nerd Font Mono", {
   weight = "Medium",
 })
 config.font_size = 22.0
+
+config.font_rules = {
+  {
+    intensity = "Bold",
+    italic = false,
+    font = wezterm.font("IosevkaTerm Nerd Font Mono", {
+      weight = "Bold",
+    }),
+  },
+  {
+    intensity = "Bold",
+    italic = true,
+    font = wezterm.font("IosevkaTerm Nerd Font Mono", {
+      weight = "Bold",
+      style = "Italic",
+    }),
+  },
+}
 
 -- Theme
 config.color_scheme = "Gruber (base16)"
