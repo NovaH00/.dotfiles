@@ -7,3 +7,5 @@ require('config.autocmds')
 require('config.commands')
 require('config.lsp')
 require('config.lazy')
+
+vim.lsp.enable("sourcekit")
