@@ -54,7 +54,7 @@ autocmd('BufLeave', {
   group = augroup('CloseFinishedTerminal', { clear = true }),
   callback = function(args)
     local bufnr = args.buf
-    if vim.bo[bufnr].buftype ~= 'terminal' then
+    if vim.bo[bufnr].buftype ~= 'terminal' or vim.b[bufnr].keep_persistent then
       return
     end
     local job = vim.b[bufnr].terminal_job_id
