@@ -55,7 +55,10 @@ map('n', 'x', '"_x', { desc = 'Delete char to black hole register' })
 map('x', 'x', '"_d', { desc = 'Delete selection to black hole register' })
 map('n', 'xx', '"_dd', { desc = 'Delete line to black hole register' })
 
-local function open_terminal_prompt()
+local function open_terminal_prompt(opts)
+  opts = opts or {}
+  local append_arg = opts.append_arg
+  local title = opts.title or ' Run Terminal Command '
   local orig_cmdheight = vim.o.cmdheight
   local orig_showmode = vim.o.showmode
   vim.o.showmode = false
@@ -71,6 +74,10 @@ local function open_terminal_prompt()
   local row = vim.o.lines - 1
   local col = 0
 
+  if #title > (width - 4) then
+    title = title:sub(1, math.max(0, width - 7)) .. '... '
+  end
+
   local win = vim.api.nvim_open_win(buf, true, {
     relative = 'editor',
     width = width,
@@ -79,7 +86,7 @@ local function open_terminal_prompt()
     col = col,
     style = 'minimal',
     border = { '─', '─', '─', '', '', '', '', '' },
-    title = ' Run Terminal Command ',
+    title = title,
     title_pos = 'left',
   })
 
@@ -108,15 +115,20 @@ local function open_terminal_prompt()
       if cmd ~= '' then
         table.insert(term_history, cmd)
 
+        local full_cmd = cmd
+        if append_arg and append_arg ~= '' then
+          full_cmd = cmd .. ' ' .. vim.fn.shellescape(append_arg)
+        end
+
         if term_win and vim.api.nvim_win_is_valid(term_win) then
           vim.api.nvim_set_current_win(term_win)
         else
-          local height = math.floor(vim.o.lines * 0.4)
-          vim.cmd('botright ' .. height .. 'split')
+          local term_height = math.floor(vim.o.lines * 0.4)
+          vim.cmd('botright ' .. term_height .. 'split')
           term_win = vim.api.nvim_get_current_win()
         end
 
-        vim.cmd('term ' .. cmd)
+        vim.cmd('term ' .. full_cmd)
         local term_buf = vim.api.nvim_get_current_buf()
         vim.b[term_buf].keep_persistent = true
       end
@@ -227,7 +239,9 @@ local function open_terminal_prompt()
   vim.cmd('startinsert')
 end
 
-map('n', 't', open_terminal_prompt, { desc = 'Run terminal command in popup' })
+_G.open_terminal_prompt = open_terminal_prompt
+
+map('n', 't', function() open_terminal_prompt() end, { desc = 'Run terminal command in popup' })
 
 local function resolve_file(candidate)
   if not candidate or candidate == '' then

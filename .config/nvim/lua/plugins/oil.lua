@@ -47,6 +47,25 @@ return {
     vim.api.nvim_set_hl(0, 'WinBar', { link = 'Normal' })
     vim.api.nvim_set_hl(0, 'WinBarNC', { link = 'Normal' })
 
+    local function run_command_on_cursor_entry()
+      local oil = require('oil')
+      local entry = oil.get_cursor_entry()
+      local dir = oil.get_current_dir()
+      if not entry or not dir then
+        return
+      end
+
+      local path = vim.fs.normalize(dir .. entry.name)
+      local display_path = vim.fn.fnamemodify(path, ':~:.')
+
+      if _G.open_terminal_prompt then
+        _G.open_terminal_prompt({
+          title = string.format(' Command to run on "%s" ', display_path),
+          append_arg = path,
+        })
+      end
+    end
+
     require('oil').setup({
       default_file_explorer = true,
       delete_to_trash = true,
@@ -103,6 +122,10 @@ return {
         ['q'] = 'actions.close',
         ['<C-p>'] = 'actions.close',
         ['<CR>'] = 'actions.select',
+        ['<C-t>'] = {
+          desc = 'Run terminal command on item under cursor',
+          callback = run_command_on_cursor_entry,
+        },
         ['-'] = 'actions.parent',
         ['_'] = 'actions.open_cwd',
         ['`'] = 'actions.cd',
